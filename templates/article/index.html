@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% load article_extras %}
+
+{% block title %}BeTale{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- 文章列表 -->
+        <div class="col-9 mt-5">
+            <div class="main row">
+                {% for article in articles %}
+                <div class="col-6 mb-4">
+                    <!-- 文章容器 -->
+                    <div class="line-top"></div>
+                    <div class="card-title">
+                        <a href="{% url 'article:detail' article.id %}">
+                            <h5>{{ article.title }}</h5>
+                        </a>
+                    </div>
+                    <div class="line-cen"></div>
+                    <!-- 摘要 -->
+                    <div class="card-body">
+                        <p class="card-text">{{ article.excerpt }}...</p>
+                    </div>
+                    <div class="line-bot"></div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- 页码导航 -->
+            <div class="pagination">
+                <div class="m-auto">
+                    <span class="step-links">
+                        <!-- 如果不是第一页，则显示上翻按钮 -->
+                        {% if articles.has_previous %}
+                        <a href="?page=1" class="btn btn-success btn-sm">
+                            &laquo;
+                        </a>
+                        <span>...</span>
+                        <a href="?page={{ articles.previous_page_number }}" class="btn btn-secondary btn-sm">
+                            {{ articles.previous_page_number }}
+                        </a>
+                        {% endif %}
+
+                        <!-- 当前页面 -->
+                        <span class="current btn btn-danger btn-md">
+                            {{ articles.number }}
+                        </span>
+
+                        <!-- 如果不是最末页，则显示下翻按钮 -->
+                        {% if articles.has_next %}
+                        <a href="?page={{ articles.next_page_number }}" class="btn btn-secondary btn-sm">
+                            {{ articles.next_page_number }}
+                        </a>
+                        <span>...</span>
+                        <a href="?page={{ articles.paginator.num_pages }}" class="btn btn-success btn-sm">
+                            &raquo;
+                        </a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 mt-5">
+            {% show_categories %}
+            {% show_tags %}
+            {% show_archives %}
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,32 @@
+body {
+  background-color: wheat;
+}
+
+.frame {
+  border-radius: 10px;
+  border: 2px rgb(170, 170, 170) solid;
+  width: 60%;
+  margin: 50px auto;
+  padding: 30px 50px 0px;
+  background-color: white;
+}
+
+header, footer {
+  text-align: center;
+  margin: 0 auto;
+}
+
+p {
+  font-size: large;
+  line-height: 150%;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+h4.mess {
+  font-weight: lighter;
+}

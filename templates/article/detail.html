@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load article_extras %}
+
+{% block title %}文章详情{% endblock title %}
+
+{% block content %}
+
+<!-- 文章详情 -->
+<div class="container">
+    <div class="row">
+        <!-- 主栏 -->
+        <div class='col-9'>
+            <h1 class="mt-4 mb-2">{{ article.title }}</h1>
+            <!-- 信息栏 -->
+            <div class="alert alert-primary">
+                Author: {{ article.author }}
+                · <a href="{% url 'article:update' article.id %}" style="text-decoration: none;">Update</a>
+                <!--使用POST提交删除请求-->
+                · <a href="#" onclick="confirm_delete()" style="text-decoration: none;">Delete</a>
+                <form style="display:none;" id="delete" action="{% url 'article:delete' article.id %}"
+                    method="POST">
+                    {% csrf_token %}
+                    <button type="submit"> </button>
+                </form>
+            </div>
+            <!-- 文章正文 -->
+            <div>
+                <p>{{ article.body|safe }}</p>
+            </div>
+        </div>
+
+        <!-- 侧栏 -->
+        <div class="col-3 mt-5">
+            {% if article.toc %}
+            <div class="widget widget-content">
+                <b class="widget-title">文章目录</b>
+                <hr>
+                <div class="toc">
+                    <ul>
+                        {{ article.toc|safe }}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+            {% show_tags %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirm_delete() {
+        // 调用layer弹窗组件
+        layer.open({
+            title: "确认删除",
+            content: "确认删除这篇文章吗？",
+            yes: function (index, layero) {
+                $('form#delete button').click();
+                layer.close(index);
+            },
+        })
+    }
+</script>
+
+{% endblock content %}

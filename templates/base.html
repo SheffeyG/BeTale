@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- icon -->
+    <link rel="icon" href="{% static 'icon/logo.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'icon/logo.ico' %}" type="image/x-icon">
+
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css">
+    <link rel="stylesheet" href="{% static 'custom/codehilite.css' %}">
+    <link rel="stylesheet" href="{% static 'custom/base.css' %}">
+
+    <!-- dns -->
+    <link rel="dns-prefetch" href="//cdn.bootcss.com" />
+    <link rel="dns-prefetch" href="//cdn.mathjax.org" />
+
+    <!-- js -->
+    <script type="text/x-mathjax-config" src="static/custom/mathjax.js"></script>
+</head>
+
+<body>
+    <div class="frame">
+        <header>{% include 'header.html' %}</header>
+        {% block content %}{% endblock content %}
+        <footer>{% include 'footer.html' %}</footer>
+    </div>
+
+    <!-- js -->
+    <script src="{% static 'jquery/jquery.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'layer/layer.js' %}"></script>
+    <script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        hljs.initLineNumbersOnLoad();
+    </script>
+</body>
+
+</html>
