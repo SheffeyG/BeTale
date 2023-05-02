@@ -115,7 +115,8 @@ _credentials.py
 .idea/tasks.xml
 .idea/dictionaries/
 
-
+# project
+whoosh_index/
 
 
 
