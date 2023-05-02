@@ -14,7 +14,7 @@ Clone this repo, and installing dependency packages:
 ```
 git clone https://github.com/sheffeyG/BeTale.git
 cd BeTale
-pipenv install
+pipenv install --dev
 ```
 
 Run the following command in the project root directory to migrate the database:

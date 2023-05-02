@@ -8,6 +8,9 @@ markdown = "*"
 whoosh = "*"
 jieba = "*"
 faker = "*"
+django = "*"
+django-pure-pagination = "*"
+django-haystack = "*"
 
 [dev-packages]
 
