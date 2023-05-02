@@ -17,7 +17,7 @@ sys.path.append(BASE_DIR)
 
 if __name__ == "__main__":
     # 启动 django
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "blogproject.settings.local")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
     django.setup()
 
     from blog.models import Category, Post, Tag

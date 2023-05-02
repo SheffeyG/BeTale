@@ -1,6 +1,5 @@
-from django.contrib import messages
-from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect, render
+import re
+from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 
 from pure_pagination.mixins import PaginationMixin
@@ -46,15 +45,29 @@ class PostDetailView(DetailView):
     context_object_name = "post"
 
     def get(self, request, *args, **kwargs):
-        # 覆写 get 方法的目的是因为每当文章被访问一次，就得将文章阅读量 +1
-        # get 方法返回的是一个 HttpResponse 实例
         # 之所以需要先调用父类的 get 方法，是因为只有当 get 方法被调用后，
         # 才有 self.object 属性，其值为 Post 模型实例，即被访问的文章 post
         response = super().get(request, *args, **kwargs)
 
         # 将文章阅读量 +1
-        # 注意 self.object 的值就是被访问的文章 post
         self.object.increase_views()
 
         # 视图必须返回一个 HttpResponse 对象
         return response
+    
+    def get_context_data(self, **kwargs):
+        # 重写进行公式渲染
+        context = super().get_context_data(**kwargs)
+
+        text = context['post'].body
+        # 要先对行间公式处理，然后才对行内公式处理
+        pattern2 = re.compile(r'(\$\$)(.*?)(\$\$)', re.S)
+        pattern1 = re.compile(r'(\$)(.*?)(\$)', re.S)
+        text = re.sub(pattern2, '<div align=center><img src="http://latex.codecogs.com/svg.latex?\g<2>"></div>', text)
+        text = re.sub(pattern1, '<img src="http://latex.codecogs.com/svg.latex?\g<2>">', text)
+
+        context['post'].body = text
+
+        return context
+
+
