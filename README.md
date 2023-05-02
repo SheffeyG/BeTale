@@ -33,7 +33,9 @@ pipenv run python manage.py createsuperuser
 
 Run the following command in the project root directory to open the development server:
 
+```
 pipenv run python manage.py runserver
+```
 
 Visit http://127.0.0.1:8000/admin and log in to the backend to post articles using your administrator account.
 
